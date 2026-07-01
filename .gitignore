@@ -10,3 +10,4 @@
 # Abaikan file log dan build
 /backend/storage/*.key
 /frontend/dist/
+project_files.txt
