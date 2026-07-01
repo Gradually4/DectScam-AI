@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-brand-primary: #2563EB;
+  --color-brand-hover: #1D4ED8;
+  --color-brand-bg: #F8FAFC;
+  --color-brand-border: #E2E8F0;
+  --color-brand-card: #FFFFFF;
+  --color-brand-green: #10B981;
+  --color-brand-yellow: #F59E0B;
+  --color-brand-red: #EF4444;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: #F8FAFC;
+  color: #0F172A;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+/* Premium Light Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F1F5F9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
+
+/* Hide default Edge/IE password reveal button */
+input::-ms-reveal,
+input::-ms-clear {
+  display: none;
+}

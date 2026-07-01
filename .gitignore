@@ -1,0 +1,12 @@
+# Abaikan folder dependensi
+/backend/vendor/
+/frontend/node_modules/
+
+# Abaikan file environment (RAHASIA)
+/backend/.env
+/frontend/.env
+.env
+
+# Abaikan file log dan build
+/backend/storage/*.key
+/frontend/dist/

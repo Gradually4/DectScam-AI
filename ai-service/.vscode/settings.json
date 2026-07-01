@@ -1,0 +1,10 @@
+{
+  "python.defaultInterpreterPath": "d:\\Universitas Amikom Yogyakarta\\Semester 4\\SCAM\\ai-service\\venv\\Scripts\\python.exe",
+  "python.pythonPath": "d:\\Universitas Amikom Yogyakarta\\Semester 4\\SCAM\\ai-service\\venv\\Scripts\\python.exe",
+  "python.analysis.extraPaths": [
+    "d:\\Universitas Amikom Yogyakarta\\Semester 4\\SCAM\\ai-service\\venv\\Lib\\site-packages"
+  ],
+  "pyrefly.interpreterPath": "d:\\Universitas Amikom Yogyakarta\\Semester 4\\SCAM\\ai-service\\venv\\Scripts\\python.exe",
+  "pyrefly.pythonPath": "d:\\Universitas Amikom Yogyakarta\\Semester 4\\SCAM\\ai-service\\venv\\Scripts\\python.exe",
+  "css.lint.unknownAtRules": "ignore"
+}
