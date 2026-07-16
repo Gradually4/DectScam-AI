@@ -220,7 +220,7 @@ async def detect_url(request: UrlScanRequest):
         if api_key and api_key.strip() != "":
             try:
                 genai.configure(api_key=api_key)
-                model = genai.GenerativeModel('gemini-2.5-flash-lite')
+                model = genai.GenerativeModel('gemini-2.5-flash')
                 
                 prompt = (
                     f"Analyze the safety of the following URL/domain: '{request.url}'.\n"
@@ -417,7 +417,7 @@ async def chat_assistant(request: ChatRequest):
             return {
                 "status": "success",
                 "bot_reply": (
-                    "Halo! Saya **DectScam AI Security Assistant** 🛡️.\n\n"
+                    "Halo! Saya **DectScam AI Security Assistant**.\n\n"
                     "⚠️ **Pemberitahuan**: Sistem AI pintar (Gemini LLM) belum selesai dikonfigurasi oleh tim pengembang (API Key kosong).\n\n"
                     "Silakan tempelkan API Key Gemini asli Anda ke file `.env` di dalam folder `ai-service` (`GEMINI_API_KEY=AIzaSy...`) untuk mengaktifkan asisten cerdas ini.\n\n"
                     "Untuk sementara, jika Anda mengalami penipuan keuangan: segera hubungi bank/e-wallet tujuan untuk memblokir dana, kumpulkan screenshot bukti percakapan/transfer, lalu buat laporan resmi ke pihak berwajib."
@@ -427,15 +427,17 @@ async def chat_assistant(request: ChatRequest):
         # Dynamically configure API key
         genai.configure(api_key=api_key)
 
-        # Initialize the gemini-2.5-flash-lite model
-        model = genai.GenerativeModel('gemini-2.5-flash-lite')
+        # Initialize the gemini-2.5-flash model
+        model = genai.GenerativeModel('gemini-2.5-flash')
 
         # Define cybersecurity assistant persona and system instructions
         context = (
             "Anda adalah DectScam AI, asisten keamanan siber yang ramah, profesional, dan empatik. "
             "Tugas Anda adalah membantu pengguna mengidentifikasi indikasi penipuan (scam/phishing), memberikan panduan keamanan siber tingkat dasar, "
             "langkah penyelamatan data setelah menjadi korban penipuan, dan panduan penggunaan fitur aplikasi DectScam AI. "
-            "Gunakan bahasa Indonesia yang natural, mudah dipahami masyarakat awam, dan berikan langkah mitigasi terstruktur (gunakan bullet/numbering yang rapi jika menjelaskan langkah)."
+            "ATURAN KETAT: Jika pengguna menanyakan hal di luar topik keamanan siber, penipuan, phishing, malware, atau DectScam AI (seperti tentang Avengers, matematika, resep masakan, dll), "
+            "tolak menjawab pertanyaan tersebut secara halus, ingatkan pengguna bahwa Anda hanya fokus pada keamanan siber, dan arahkan kembali percakapan ke topik keamanan siber. "
+            "Gunakan bahasa Indonesia yang natural, mudah dipahami masyarakat awam, dan berikan langkah mitigasi terstruktur."
         )
 
         prompt = f"{context}\n\nUser Message: {user_msg}"
@@ -480,7 +482,7 @@ async def detect_investment(request: InvestmentScanRequest):
         if api_key and api_key.strip() != "":
             try:
                 genai.configure(api_key=api_key)
-                model = genai.GenerativeModel('gemini-2.5-flash-lite')
+                model = genai.GenerativeModel('gemini-2.5-flash')
                 
                 # Combine system prompt and promotional text
                 prompt = (
@@ -606,7 +608,7 @@ async def detect_text_advanced(request: TextAdvancedRequest):
         if api_key and api_key.strip() != "":
             try:
                 genai.configure(api_key=api_key)
-                model = genai.GenerativeModel('gemini-2.5-flash-lite')
+                model = genai.GenerativeModel('gemini-2.5-flash')
                 
                 prompt = (
                     f"{request.system_prompt}\n\n"

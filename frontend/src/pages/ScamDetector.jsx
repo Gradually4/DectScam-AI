@@ -146,7 +146,7 @@ export default function ScamDetector() {
                     </>
                   )}
                 </button>
-                
+
                 {(textContent || riskScore !== null) && (
                   <button
                     type="button"
@@ -161,78 +161,80 @@ export default function ScamDetector() {
             </form>
           </div>
 
-          {/* Results section - Always visible */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Risk Score Widget */}
-            <div className="p-6 rounded-3xl bg-white border border-slate-200 flex flex-col items-center justify-between text-center shadow-sm">
-              <h4 className="text-sm font-bold text-slate-800 mb-4">Fraud Risk Score</h4>
-              
-              {/* Circular Score Visualizer */}
-              <div className="relative w-36 h-36 flex items-center justify-center">
-                <svg className="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
-                  <path
-                    className="text-slate-100"
-                    strokeWidth="2.5"
-                    stroke="currentColor"
-                    fill="none"
-                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                  />
-                  <path
-                    className={(riskLevel || 'aman') === 'bahaya' ? 'text-brand-red' : (riskLevel || 'aman') === 'waspada' ? 'text-brand-yellow' : 'text-brand-green'}
-                    strokeDasharray={`${riskScore || 0}, 100`}
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    stroke="currentColor"
-                    fill="none"
-                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                  />
-                </svg>
-                <div className="absolute flex flex-col">
-                  <span className="text-3xl font-extrabold text-slate-800">{riskScore !== null ? `${riskScore}%` : '0%'}</span>
-                  <span className="text-[10px] text-slate-400 font-bold uppercase">Skor Risiko</span>
+          {/* Results section */}
+          {riskScore !== null && (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {/* Risk Score Widget */}
+              <div className="p-6 rounded-3xl bg-white border border-slate-200 flex flex-col items-center justify-between text-center shadow-sm">
+                <h4 className="text-sm font-bold text-slate-800 mb-4">Fraud Risk Score</h4>
+
+                {/* Circular Score Visualizer */}
+                <div className="relative w-36 h-36 flex items-center justify-center">
+                  <svg className="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
+                    <path
+                      className="text-slate-100"
+                      strokeWidth="2.5"
+                      stroke="currentColor"
+                      fill="none"
+                      d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                    />
+                    <path
+                      className={(riskLevel || 'aman') === 'bahaya' ? 'text-brand-red' : (riskLevel || 'aman') === 'waspada' ? 'text-brand-yellow' : 'text-brand-green'}
+                      strokeDasharray={`${riskScore || 0}, 100`}
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      stroke="currentColor"
+                      fill="none"
+                      d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                    />
+                  </svg>
+                  <div className="absolute flex flex-col">
+                    <span className="text-3xl font-extrabold text-slate-800">{riskScore !== null ? `${riskScore}%` : '0%'}</span>
+                    <span className="text-[10px] text-slate-400 font-bold uppercase">Skor Risiko</span>
+                  </div>
+                </div>
+
+                <div className="mt-4">
+                  <span className={`px-4 py-1.5 rounded-full text-xs font-bold border uppercase ${getRiskStyles(riskLevel || 'aman').bg} ${getRiskStyles(riskLevel || 'aman').text}`}>
+                    {getRiskStyles(riskLevel || 'aman').label}
+                  </span>
                 </div>
               </div>
 
-              <div className="mt-4">
-                <span className={`px-4 py-1.5 rounded-full text-xs font-bold border uppercase ${getRiskStyles(riskLevel || 'aman').bg} ${getRiskStyles(riskLevel || 'aman').text}`}>
-                  {getRiskStyles(riskLevel || 'aman').label}
-                </span>
+              {/* Analysis Explanation & Highlight */}
+              <div className="md:col-span-2 p-6 rounded-3xl bg-white border border-slate-200 flex flex-col justify-between shadow-sm">
+                <div>
+                  <div className="flex items-center space-x-2 mb-4">
+                    {React.createElement(getRiskStyles(riskLevel || 'aman').icon, {
+                      className: `h-6 w-6 ${getRiskStyles(riskLevel || 'aman').text}`
+                    })}
+                    <h4 className="text-sm font-bold text-slate-800">Hasil Temuan AI</h4>
+                  </div>
+
+                  <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 mb-6">
+                    <p className="text-sm font-semibold text-slate-600 leading-relaxed">
+                      {hasilTemuanAI || 'Pesan tampak normal dan aman untuk dibaca.'}
+                    </p>
+                  </div>
+                </div>
+
+                <div>
+                  <h5 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Kata Kunci Manipulatif Terdeteksi</h5>
+                  <div className="flex flex-wrap gap-2">
+                    {manipulativeKeywords && manipulativeKeywords.length > 0 ? (
+                      manipulativeKeywords.map((word, idx) => (
+                        <span key={idx} className="px-3 py-1 rounded-lg bg-brand-red/10 border border-brand-red/20 text-brand-red text-xs font-bold">
+                          {word}
+                        </span>
+                      ))
+                    ) : (
+                      <span className="text-xs text-slate-400 font-medium">Tidak ada kata kunci manipulatif terdeteksi.</span>
+                    )}
+                  </div>
+                </div>
               </div>
             </div>
-
-            {/* Analysis Explanation & Highlight */}
-            <div className="md:col-span-2 p-6 rounded-3xl bg-white border border-slate-200 flex flex-col justify-between shadow-sm">
-              <div>
-                <div className="flex items-center space-x-2 mb-4">
-                  {React.createElement(getRiskStyles(riskLevel || 'aman').icon, {
-                    className: `h-6 w-6 ${getRiskStyles(riskLevel || 'aman').text}`
-                  })}
-                  <h4 className="text-sm font-bold text-slate-800">Hasil Temuan AI</h4>
-                </div>
-                
-                <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 mb-6">
-                  <p className="text-sm font-semibold text-slate-600 leading-relaxed">
-                    {hasilTemuanAI || 'Pesan tampak normal dan aman untuk dibaca.'}
-                  </p>
-                </div>
-              </div>
-
-              <div>
-                <h5 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Kata Kunci Manipulatif Terdeteksi</h5>
-                <div className="flex flex-wrap gap-2">
-                  {manipulativeKeywords && manipulativeKeywords.length > 0 ? (
-                    manipulativeKeywords.map((word, idx) => (
-                      <span key={idx} className="px-3 py-1 rounded-lg bg-brand-red/10 border border-brand-red/20 text-brand-red text-xs font-bold">
-                        {word}
-                      </span>
-                    ))
-                  ) : (
-                    <span className="text-xs text-slate-400 font-medium">Tidak ada kata kunci manipulatif terdeteksi.</span>
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
+          )}
         </main>
       </div>
     </div>
